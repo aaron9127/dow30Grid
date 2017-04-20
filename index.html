@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Stock Quotes!</title>
+    <link rel='stylesheet' href='renderer.css'>
+  </head>
+  <body>
+    <h1>Concise Stock Quotes!</h1>
+    <nav>
+      <p><a href='index.html' target='_self'>Refresh</a></p>
+    </nav>
+    <p id='loading'>Loading...</p>
+    <template>
+      <section>
+        <loop through='stocks' val='stock'>
+          <article class='stock {stock.class}'>
+            <p class='stockname'>{stock.name}</p>
+            <p>{stock.symbol}</p>
+            <p>{stock.price}</p>
+            <p>{stock.change} ({stock.percent}%)</p>
+          </article>
+        </loop>
+      </section>
+    </template>
+  </body>
+  <script>
+    require('./renderer.js')
+  </script>
+</html>

@@ -1,0 +1,65 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+h1 {
+  margin-top: 5px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+nav {
+  text-align: center;
+  margin: 0;
+}
+
+nav p {
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+
+.error {
+  color: red;
+  font-weight: bold;
+}
+
+section {
+  text-align: center;
+}
+
+.stock {
+  border: 1px solid black;
+  display: inline-block;
+  width: 200px;
+  height: 140px;
+  margin: 2px;
+  text-align: center;
+  color: white;
+}
+
+.positive {
+  background-color: green;
+}
+
+.positive p:last-child::before {
+  content: "▲ ";
+}
+
+.neutral {
+  background-color: gray;
+}
+
+.negative {
+  background-color: red;
+}
+
+.negative p:last-child::before {
+  content: "▼ ";
+}
+
+.stockname {
+  font-weight: bold;
+  font-size: 18px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
