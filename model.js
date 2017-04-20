@@ -31,7 +31,9 @@ module.exports = function(done) {
         'CSCO&f=nsl1c1p2',
         'GS&f=nsl1c1p2',
         'DD&f=nsl1c1p2',
-        'AAPL&f=nsl1c1p2'
+        'AAPL&f=nsl1c1p2',
+        'BAC&f=nsl1c1p2',
+        'DPZ&f=nsl1c1p2'
       ],
       stockListLength = stockList.length,
       stockUri,
@@ -77,6 +79,7 @@ module.exports = function(done) {
         .replace(/(( compan)|( corp)|( incorp)|(\.)|( communica)|( stores)|( common)|( inc)|( group)|( \& co.)).*/i, '')
         .replace(/international business machines/i, 'IBM');
 
+      csvMemberArr[2] = round(Number(csvMemberArr[2]), 2).toFixed(2);
       csvMemberArr[3] = round(Number(csvMemberArr[3]), 2).toFixed(2);
       csvMemberArr[4] = csvMemberArr[4].slice(0, -2);
       csvMemberArr[4] = Number(csvMemberArr[4]);
