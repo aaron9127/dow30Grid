@@ -67,32 +67,15 @@ module.exports = function(done) {
 
     for (i = 0; i < csvLength; i++) {
       csvMember = csv[i];
-      csvMember = csvMember
-        .replace(/ common stock/i, '')
-        .replace(/ common st/i, '')
-        .replace(/ common s/i, '')
-        .replace(/ common/i, '')
-        .replace(/, inc./i, '')
-        .replace(/ incorporated/i, '')
-        .replace(/ inc./i, '')
-        .replace(/  \(new\)/i, '')
-        .replace(/ \(the\)/i, '')
-        .replace(/merck & company/i, 'Merck & Co')
-        .replace(/ company/i, '')
-        .replace(/ corporation/i, '')
-        .replace(/ stores/i, '')
-        .replace(/\e\.\i\. du pont de nemours and com/i, 'Du Pont')
-        .replace(/international business machines/i, 'IBM')
-        .replace(/verizon communications com/i, 'Verizon')
-        .replace(/jp morgan chase & co./i, 'JP Morgan Chase')
-        .replace(/the travelers companies c/i, 'Travelers')
-        .replace(/goldman sachs group/i, 'Goldman Sachs')
-        .replace(/chevronoc/i, 'Chevron')
-        .replace(/walt disney commo/i, 'Walt Disney')
-        .replace(/boeingo/i, 'Boeing')
-        .replace(/"/gi, '');
+      csvMember = csvMember.replace(/"|, inc/gi, '');
 
       csvMemberArr = csvMember.split(',');
+
+      csvMemberArr[0] = csvMemberArr[0]
+        .replace(/e\.i\..*/i, 'Du Pont')
+        .replace(/merck.*/i, 'Merck & Co')
+        .replace(/(( compan)|( corp)|( incorp)|(\.)|( communica)|( stores)|( common)|( inc)|( group)|( \& co.)).*/i, '')
+        .replace(/international business machines/i, 'IBM');
 
       csvMemberArr[3] = round(Number(csvMemberArr[3]), 2).toFixed(2);
       csvMemberArr[4] = csvMemberArr[4].slice(0, -2);
