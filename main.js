@@ -7,7 +7,7 @@ const electron = require('electron'),
 let mainWindow
 
 function createWindow () {
-  mainWindow = new BrowserWindow({width: 1100, height: 1000});
+  mainWindow = new BrowserWindow({width: 1275, height: 900});
 
   mainWindow.loadURL(url.format({
     pathname: path.join(__dirname, 'index.html'),

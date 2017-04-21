@@ -31,9 +31,7 @@ module.exports = function(done) {
         'CSCO&f=nsl1c1p2',
         'GS&f=nsl1c1p2',
         'DD&f=nsl1c1p2',
-        'AAPL&f=nsl1c1p2',
-        'BAC&f=nsl1c1p2',
-        'DPZ&f=nsl1c1p2'
+        'AAPL&f=nsl1c1p2'
       ],
       stockListLength = stockList.length,
       stockUri,
@@ -76,6 +74,7 @@ module.exports = function(done) {
       csvMemberArr[0] = csvMemberArr[0]
         .replace(/e\.i\..*/i, 'Du Pont')
         .replace(/merck.*/i, 'Merck & Co')
+        .replace(/the travelers*/i, 'Travelers')
         .replace(/(( compan)|( corp)|( incorp)|(\.)|( communica)|( stores)|( common)|( inc)|( group)|( \& co.)).*/i, '')
         .replace(/international business machines/i, 'IBM');
 
