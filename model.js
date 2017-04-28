@@ -74,21 +74,7 @@ module.exports = function(done) {
         });
       }
     }
-
-    function compare(a,b) {
-      if (a.percent < b.percent)
-        return 1;
-      else if (a.percent > b.percent)
-        return -1;
-      else if (a.percent === b.percent) {
-        if (a.change < b.change)
-          return 1;
-        if (a.change > b.change)
-          return -1;
-      }
-      return 0;
-    }
-
+    
     function round(value, exp) {
       if (typeof exp === 'undefined' || +exp === 0)
         return Math.round(value);
@@ -108,7 +94,6 @@ module.exports = function(done) {
       return +(value[0] + 'e' + (value[1] ? (+value[1] - exp) : -exp));
     }
 
-    stocks.sort(compare);
     model.stocks = stocks;
 
     done(model);
