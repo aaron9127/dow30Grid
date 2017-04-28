@@ -94,7 +94,11 @@ module.exports = function(done) {
       return +(value[0] + 'e' + (value[1] ? (+value[1] - exp) : -exp));
     }
     
-    stocks.sort(function compare(a,b) {return (b.percent - a.percent || b.change - a.change || b.price - a.price)});
+    function compare(a,b) {
+      return (b.percent - a.percent || b.change - a.change || b.price - a.price);
+    }
+    
+    stocks.sort(compare);
 
     model.stocks = stocks;
 
