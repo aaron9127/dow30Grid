@@ -45,7 +45,7 @@ module.exports = function(done) {
         csvMemberArr[0] = csvMemberArr[0]
           .replace(/e\.i\..*/i, 'Du Pont')
           .replace(/merck.*/i, 'Merck & Co')
-          .repalce(/the travelers*/i, 'Travelers')
+          .replace(/the /i, '')
           .replace(/(( compan)|( corp)|( incorp)|(\.)|( communica)|( stores)|( common)|( inc)|( group)|( \& co.)).*/i, '')
           .replace(/international business machines/i, 'IBM');
 
