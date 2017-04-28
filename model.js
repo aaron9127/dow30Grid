@@ -93,6 +93,8 @@ module.exports = function(done) {
       value = value.toString().split('e');
       return +(value[0] + 'e' + (value[1] ? (+value[1] - exp) : -exp));
     }
+    
+    stocks.sort(function compare(a,b) {return (b.percent - a.percent || b.change - a.change || b.price - a.price)});
 
     model.stocks = stocks;
 
