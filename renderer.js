@@ -6,7 +6,7 @@ model = require(path.join(__dirname, 'model.js'))(function(model, err) {
       loading = document.getElementById('loading'),
       content = template.innerHTML,
       renderedTemplate = teddy.render(content, model);
-
+  
   if (!err) {
     document.body.insertAdjacentHTML('beforeEnd', renderedTemplate);
     loading.setAttribute('hidden', 'hidden');

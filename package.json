@@ -1,7 +1,7 @@
 {
-  "name": "gridify-stocks",
-  "version": "0.1.1",
-  "description": "Make stocks great again",
+  "name": "Dow_30_Grid",
+  "version": "0.1.2",
+  "description": "Make Stocks Great Again",
   "main": "main.js",
   "license": "CC0-1.0",
   "dependencies": {
@@ -14,6 +14,6 @@
   },
   "scripts": {
     "start": "electron .",
-    "build-win": "electron-packager ./ 'Gridify Stocks' --app-bundle-id=gridify-stocks --version-string.FileDescription='Gridify Stocks' --asar --prune --out=build --overwrite=true --platform=win32 --arch=x64 && cd 'build/Gridify Stocks-win32-x64' && rm -rf LICENSE* version && zip -9 -ry ../Gridify.Stocks-win32-x64.zip '../Gridify Stocks-win32-x64' && cd ../../"
+    "build-win": "electron-packager . Dow_30_Grid --app-bundle-id=Dow_30_Grid --version-string.FileDescription=Dow_30_Grid --asar --prune --out=build --overwrite=true --platform=win32 --arch=x64"
   }
 }

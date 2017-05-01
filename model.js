@@ -45,9 +45,11 @@ module.exports = function(done) {
         csvMemberArr[0] = csvMemberArr[0]
           .replace(/e\.i\..*/i, 'Du Pont')
           .replace(/merck.*/i, 'Merck & Co')
+          .replace(/the /i, '')
           .replace(/(( compan)|( corp)|( incorp)|(\.)|( communica)|( stores)|( common)|( inc)|( group)|( \& co.)).*/i, '')
           .replace(/international business machines/i, 'IBM');
 
+        csvMemberArr[2] = round(Number(csvMemberArr[2]), 2).toFixed(2);
         csvMemberArr[3] = round(Number(csvMemberArr[3]), 2).toFixed(2);
         csvMemberArr[4] = csvMemberArr[4].slice(0, -2);
         csvMemberArr[4] = Number(csvMemberArr[4]);
@@ -72,21 +74,7 @@ module.exports = function(done) {
         });
       }
     }
-
-    function compare(a,b) {
-      if (a.percent < b.percent)
-        return 1;
-      else if (a.percent > b.percent)
-        return -1;
-      else if (a.percent === b.percent) {
-        if (a.change < b.change)
-          return 1;
-        if (a.change > b.change)
-          return -1;
-      }
-      return 0;
-    }
-
+    
     function round(value, exp) {
       if (typeof exp === 'undefined' || +exp === 0)
         return Math.round(value);
@@ -105,8 +93,13 @@ module.exports = function(done) {
       value = value.toString().split('e');
       return +(value[0] + 'e' + (value[1] ? (+value[1] - exp) : -exp));
     }
-
+    
+    function compare(a,b) {
+      return b.percent - a.percent || b.change - a.change || b.price - a.price;
+    }
+    
     stocks.sort(compare);
+
     model.stocks = stocks;
 
     done(model);
