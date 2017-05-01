@@ -95,7 +95,7 @@ module.exports = function(done) {
     }
     
     function compare(a,b) {
-      return (b.percent - a.percent || b.change - a.change || b.price - a.price);
+      return b.percent - a.percent || b.change - a.change || b.price - a.price;
     }
     
     stocks.sort(compare);
