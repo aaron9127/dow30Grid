@@ -1,4 +1,5 @@
-var request = require('request');
+var request = require('request'),
+    moment = require('moment');
 
 module.exports = function(done) {
   var stockList = 'MCD+DIS+WMT+BA+VZ+PG+UTX+UNH+MMM+NKE+TRV+GE+KO+MRK+HD+JNJ+V+MSFT+XOM+CAT+AXP+INTC+CVX+PFE+IBM+JPM+CSCO+GS+DD+AAPL',
@@ -74,7 +75,7 @@ module.exports = function(done) {
         });
       }
     }
-    
+
     function round(value, exp) {
       if (typeof exp === 'undefined' || +exp === 0)
         return Math.round(value);
@@ -93,14 +94,16 @@ module.exports = function(done) {
       value = value.toString().split('e');
       return +(value[0] + 'e' + (value[1] ? (+value[1] - exp) : -exp));
     }
-    
+
     function compare(a,b) {
       return b.percent - a.percent || b.change - a.change || b.price - a.price;
     }
-    
+
     stocks.sort(compare);
 
     model.stocks = stocks;
+
+    model.currentTime = moment().format('MMMM Do YYYY, h:mm:ss a');
 
     done(model);
   };

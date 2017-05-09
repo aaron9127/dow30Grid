@@ -8,11 +8,12 @@
   <body>
     <h1>Dow 30 Grid</h1>
     <nav>
-      <p><a href='index.html' target='_self'>Refresh</a></p>
+      <p><a href='index.html' id='refresh' target='_self'>Refresh</a></p>
     </nav>
     <p id='loading'>Loading...</p>
     <template>
       <section>
+        <p id='updatetime'>Last updated: {currentTime}</p>
         <loop through='stocks' val='stock'>
           <article class='stock {stock.class}'>
             <p class='stockname'>{stock.name}</p>
