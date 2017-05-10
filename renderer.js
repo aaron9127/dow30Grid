@@ -14,7 +14,7 @@ model = require(path.join(__dirname, 'model.js'))(function(model, err) {
 
     // refresh stocks every 15 minutes
     setInterval(function() {
-      refresh.click();
+      refreshButton.click();
     }, 900000);
   }
   else {
