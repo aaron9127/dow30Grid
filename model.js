@@ -4,7 +4,6 @@ var request = require('request'),
 module.exports = (done) => {
   var stockList = 'MCD+DIS+WMT+BA+VZ+PG+UTX+UNH+MMM+NKE+TRV+GE+KO+MRK+HD+JNJ+V+MSFT+XOM+CAT+AXP+INTC+CVX+PFE+IBM+JPM+CSCO+GS+DD+AAPL',
       stockMetadata = '&f=nsl1c1p2',
-      csvList,
       model = {},
       i;
 
