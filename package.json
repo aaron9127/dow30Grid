@@ -6,15 +6,18 @@
   "license": "CC0-1.0",
   "dependencies": {
     "request": "2.81.0",
-    "teddy": "0.4.12",
+    "teddy": "0.4.13",
     "moment": "2.18.1"
   },
   "devDependencies": {
-    "electron": "~1.6.2",
+    "electron": "1.6.8",
     "electron-packager": "8.7.0"
   },
   "scripts": {
     "start": "electron .",
-    "build-win": "electron-packager . Dow_30_Grid --app-bundle-id=Dow_30_Grid --version-string.FileDescription=Dow_30_Grid --asar --prune --out=build --overwrite=true --platform=win32 --arch=x64"
+    "build": "npm run build-win && npm run build-mac && npm run build-linux",
+    "build-win": "electron-packager . 'Dow 30 Grid' --win32metadata.FileDescription='Dow 30 Grid' --asar --prune --out=build --overwrite=true --platform=win32 --arch=x64",
+    "build-mac": "electron-packager . 'Dow 30 Grid' --app-bundle-id=dow=30-grid --asar --prune --out=build --overwrite=true --platform=darwin --arch=x64",
+    "build-linux": "electron-packager . 'Dow 30 Grid' --asar --prune --out=build --overwrite=true --platform=linux --arch=x64"
   }
 }
