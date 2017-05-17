@@ -17,7 +17,7 @@
     "start": "electron .",
     "build": "npm run build-win && npm run build-mac && npm run build-linux",
     "build-win": "electron-packager . 'Dow 30 Grid' --win32metadata.FileDescription='Dow 30 Grid' --asar --prune --out=build --overwrite=true --platform=win32 --arch=x64",
-    "build-mac": "electron-packager . 'Dow 30 Grid' --app-bundle-id=dow=30-grid --asar --prune --out=build --overwrite=true --platform=darwin --arch=x64",
+    "build-mac": "electron-packager . 'Dow 30 Grid' --app-bundle-id=dow-30-grid --asar --prune --out=build --overwrite=true --platform=darwin --arch=x64",
     "build-linux": "electron-packager . 'Dow 30 Grid' --asar --prune --out=build --overwrite=true --platform=linux --arch=x64"
   }
 }
