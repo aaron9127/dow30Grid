@@ -1,7 +1,7 @@
 var path = require('path'),
     teddy = require('teddy');
 
-model = require(path.join(__dirname, 'model.js'))(function(model, err) {
+model = require(path.join(__dirname, 'model.js'))((model, err) => {
   var template = document.getElementsByTagName('template')[0],
       loading = document.getElementById('loading'),
       content = template.innerHTML,
@@ -13,7 +13,7 @@ model = require(path.join(__dirname, 'model.js'))(function(model, err) {
     loading.setAttribute('hidden', 'hidden');
 
     // refresh stocks every 15 minutes
-    setInterval(function() {
+    setInterval(() => {
       refreshButton.click();
     }, 900000);
   }
