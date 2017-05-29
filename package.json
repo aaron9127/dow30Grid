@@ -1,16 +1,16 @@
 {
   "name": "dow-30-grid",
-  "version": "0.1.4",
-  "description": "Make Stocks Great Again",
+  "version": "0.1.5",
+  "description": "Display information about the Dow 30 in one handy ui",
   "main": "main.js",
   "license": "CC0-1.0",
   "dependencies": {
     "request": "2.81.0",
-    "teddy": "0.4.13",
+    "teddy": "0.4.14",
     "moment": "2.18.1"
   },
   "devDependencies": {
-    "electron": "1.6.8",
+    "electron": "1.6.10",
     "electron-packager": "8.7.0"
   },
   "scripts": {
