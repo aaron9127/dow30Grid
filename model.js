@@ -58,7 +58,7 @@ module.exports = (done) => {
 
     csv = csv.replace(/"|, inc/gi, '').split('\n')
 
-    for (i in csv.length) {
+    for (i in csv) {
       csvMember = csv[i]
 
       if (csvMember) {
