@@ -1,6 +1,6 @@
 {
   "name": "dow-30-grid",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Display information about the Dow 30 in one handy ui",
   "author": "Troy Coutu <autre31415@gmail.com>",
   "main": "main.js",
