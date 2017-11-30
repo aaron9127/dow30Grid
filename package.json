@@ -6,17 +6,17 @@
   "main": "main.js",
   "license": "CC0-1.0",
   "dependencies": {
-    "request": "2.83.0",
-    "teddy": "0.4.20",
-    "moment": "2.18.1"
+    "got": "8.0.0",
+    "moment": "2.19.3",
+    "teddy": "0.4.21"
   },
   "devDependencies": {
-    "archiver": "^2.0.0",
-    "electron": "1.7.8",
-    "electron-packager": "9.1.0",
-    "standard": "10.0.3",
-    "lint-staged": "4.2.3",
-    "husky": "0.14.3"
+    "archiver": "2.1.0",
+    "electron": "1.7.9",
+    "electron-packager": "10.1.0",
+    "husky": "0.14.3",
+    "lint-staged": "5.0.0",
+    "standard": "10.0.3"
   },
   "scripts": {
     "start": "electron .",
