@@ -1,9 +1,8 @@
-const request = require('request')
+const got = require('got')
 const moment = require('moment')
 
 module.exports = (done) => {
-  let stockList = 'MCD+DIS+WMT+BA+VZ+PG+UTX+UNH+MMM+NKE+TRV+GE+KO+MRK+HD+JNJ+V+MSFT+XOM+CAT+AXP+INTC+CVX+PFE+IBM+JPM+CSCO+GS+DD+AAPL'
-  let stockMetadata = '&f=nsl1c1p2'
+  let symbolList = 'MCD,DIS,WMT,BA,VZ,PG,UTX,UNH,MMM,NKE,TRV,GE,KO,MRK,HD,JNJ,V,MSFT,XOM,CAT,AXP,INTC,CVX,PFE,IBM,JPM,CSCO,GS,DD-B,AAPL'
   let model = {}
 
   /**
@@ -17,68 +16,53 @@ module.exports = (done) => {
     return b.percent - a.percent || b.change - a.change || b.price - a.price
   }
 
-  // request promise
-  function req (url) {
-    return new Promise((resolve, reject) => {
-      request(url, (err, res, body) => {
-        if (!err && res.statusCode === 200 && body) {
-          resolve(body)
-        } else {
-          reject(err)
-        }
-      })
-    })
-  }
+  (async () => {
+    try {
+      const response = await got(`https://api.iextrading.com/1.0/stock/market/batch?symbols=${symbolList}&types=quote`)
+      parseStockData(JSON.parse(response.body))
+    } catch (err) {
+      console.log(err.response.body)
+      done(model, err)
+    }
+  })()
 
-  req(`http://finance.yahoo.com/d/quotes.csv?s=${stockList}${stockMetadata}`).then((body) => {
-    computeStocks(body)
-  }, (err) => {
-    console.error(err)
-    done(model, err)
-  })
-
-  function computeStocks (csv) {
-    let csvMember
-    let csvMemberArr
+  function parseStockData (stockData) {
     let stocks = []
+    let cssClass
+    let symbol
     let i
 
-    csv = csv.replace(/"|, inc/gi, '').split('\n')
+    for (i in stockData) {
+      symbol = stockData[i].quote
 
-    for (i in csv) {
-      csvMember = csv[i]
+      // sanitize company names
+      symbol.companyName = symbol.companyName
+        .replace(/e\.i\..*/i, 'Du Pont')
+        .replace(/merck.*/i, 'Merck & Co')
+        .replace(/the /i, '')
+        .replace(/(( compan)|( corp)|( incorp)|(\.)|( communica)|( stores)|( common)|( inc)|( group)|( & co.)).*/i, '')
+        .replace(/international business machines/i, 'IBM')
 
-      if (csvMember) {
-        csvMemberArr = csvMember.split(',')
+      // strip unsightly -B out of Du Pont
+      symbol.symbol = symbol.symbol.replace('DD-B', 'DD')
 
-        csvMemberArr[0] = csvMemberArr[0]
-          .replace(/e\.i\..*/i, 'Du Pont')
-          .replace(/merck.*/i, 'Merck & Co')
-          .replace(/the /i, '')
-          .replace(/(( compan)|( corp)|( incorp)|(\.)|( communica)|( stores)|( common)|( inc)|( group)|( & co.)).*/i, '')
-          .replace(/international business machines/i, 'IBM')
-
-        csvMemberArr[2] = round(Number(csvMemberArr[2]), 2).toFixed(2)
-        csvMemberArr[3] = round(Number(csvMemberArr[3]), 2).toFixed(2)
-        csvMemberArr[4] = Number(csvMemberArr[4].slice(0, -2))
-
-        if (csvMemberArr[3] > 0) {
-          csvMemberArr.push('positive')
-        } else if (csvMemberArr[3] === 0) {
-          csvMemberArr.push('neutral')
-        } else {
-          csvMemberArr.push('negative')
-        }
-
-        stocks.push({
-          name: csvMemberArr[0],
-          symbol: csvMemberArr[1],
-          price: csvMemberArr[2],
-          change: csvMemberArr[3],
-          percent: csvMemberArr[4],
-          class: csvMemberArr[5]
-        })
+      // select CSS class based on change
+      if (symbol.change > 0) {
+        cssClass = 'positive'
+      } else if (symbol.change === 0) {
+        cssClass = 'neutral'
+      } else {
+        cssClass = 'negative'
       }
+
+      stocks.push({
+        name: symbol.companyName,
+        symbol: symbol.symbol,
+        price: symbol.latestPrice.toFixed(2),
+        change: symbol.change.toFixed(2),
+        percent: round(symbol.changePercent * 100, 2),
+        class: cssClass
+      })
     }
 
     stocks.sort(compare)
