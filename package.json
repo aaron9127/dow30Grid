@@ -1,26 +1,26 @@
 {
   "name": "dow-30-grid",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "Display information about the Dow 30 in one handy ui",
   "author": "Troy Coutu <autre31415@gmail.com>",
   "main": "main.js",
   "license": "CC0-1.0",
   "dependencies": {
-    "got": "8.0.0",
-    "moment": "2.19.3",
-    "teddy": "0.4.21"
+    "got": "8.3.0",
+    "moment": "2.22.1",
+    "teddy": "0.4.25"
   },
   "devDependencies": {
-    "archiver": "2.1.0",
-    "electron": "1.7.9",
-    "electron-packager": "10.1.0",
+    "archiver": "2.1.1",
+    "electron": "1.8.4",
+    "electron-packager": "12.0.1",
     "husky": "0.14.3",
-    "lint-staged": "5.0.0",
-    "standard": "10.0.3"
+    "lint-staged": "7.0.4",
+    "standard": "11.0.1"
   },
   "scripts": {
     "start": "electron .",
-    "build": "node packager.js",
+    "package": "node packager.js",
     "test": "standard",
     "precommit": "lint-staged"
   },
