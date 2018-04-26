@@ -16,26 +16,23 @@ let options = {
   }
 }
 
-process.argv.forEach(function (arg) {
+process.argv.forEach(arg => {
   switch (arg) {
-    case '-mac':
+    case '--mac':
       options.platform = 'darwin'
-      options.arch = 'x64'
       break
-    case '-win':
+    case '--win':
       options.platform = 'win32'
-      options.arch = 'x64'
       break
-    case '-linux':
+    case '--linux':
       options.platform = 'linux'
-      options.arch = 'x64'
       break
   }
 })
 
 packager(options)
   .then((appPaths) => {
-    appPaths.forEach(function (buildDir) {
+    appPaths.forEach(buildDir => {
       let buildName = buildDir.split(path.sep)[1]
       let output = fs.createWriteStream(`build/${buildName}.zip`)
       let archive = archiver('zip', {
@@ -44,17 +41,15 @@ packager(options)
 
       console.log(`Packing ${buildName} into a zip...`)
 
-      output.on('close', function () {
+      output.on('close', () => {
         console.log(`Successfully zipped ${buildName}`)
       })
 
-      archive.on('warning', function (err) {
-        if (err) {
-          console.warn(err)
-        }
+      archive.on('warning', (err) => {
+        console.warn(err)
       })
 
-      archive.on('error', function (err) {
+      archive.on('error', (err) => {
         throw err
       })
 
