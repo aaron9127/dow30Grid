@@ -47,7 +47,7 @@ npm i
 Then:
 
 ```
-npm run package [--mac | --win | --linux]
+npm run package -- [--mac | --win | --linux]
 ```
 
 You can leave the OS argument out to package for them all.
