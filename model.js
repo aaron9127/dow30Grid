@@ -2,7 +2,7 @@ const got = require('got')
 const moment = require('moment')
 
 module.exports = (done) => {
-  let symbolList = 'MCD,DIS,WMT,BA,VZ,PG,UTX,UNH,MMM,NKE,TRV,GE,KO,MRK,HD,JNJ,V,MSFT,XOM,CAT,AXP,INTC,CVX,PFE,IBM,JPM,CSCO,GS,DD-B,AAPL'
+  let symbolList = 'MCD,DIS,WMT,BA,VZ,PG,UTX,UNH,MMM,NKE,TRV,GE,KO,MRK,HD,JNJ,V,MSFT,XOM,CAT,AXP,INTC,CVX,PFE,IBM,JPM,CSCO,GS,DWDP,AAPL'
   let model = {}
 
   /**
@@ -39,8 +39,9 @@ module.exports = (done) => {
       symbol.companyName = symbol.companyName
         .replace(/e\.i\..*/i, 'Du Pont')
         .replace(/merck.*/i, 'Merck & Co')
+        .replace(/Sachs Group.*/i, 'Sachs')
         .replace(/the /i, '')
-        .replace(/(( compan)|( corp)|( incorp)|(\.)|( communica)|( stores)|( common)|( inc)|( group)|( & co.)).*/i, '')
+        .replace(/(( compan)|( corp)|( incorp)|(\.)|( communica)|( stores)|( common)|( inc)|( & co.)).*/i, '')
         .replace(/international business machines/i, 'IBM')
 
       // strip unsightly -B out of Du Pont
